@@ -1,5 +1,6 @@
 package com.avisto.webimages.services;
 
+import com.avisto.webimages.model.Image;
 import com.avisto.webimages.model.User;
 import com.avisto.webimages.model.enums.Role;
 import com.avisto.webimages.repositories.UserRepository;
@@ -7,7 +8,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -28,5 +31,27 @@ public class UserService {
     }
     public List<User> userList(){
         return userRepository.findAll();
+    }
+    public User getUserByUsername(String username){
+        return userRepository.findByUsername(username);
+    }
+    public void saveImage(User user, MultipartFile imageFile) throws IOException {
+        Image image;
+        if (imageFile.getSize() != 0) {
+            image = toImageEntity(imageFile);
+            user.addImageToUser(image);
+            userRepository.save(user);
+        }
+    }
+
+    private Image toImageEntity(MultipartFile imageFile) throws IOException {
+        Image image = new Image();
+        image.setName(imageFile.getName());
+        image.setOriginalFileName(imageFile.getOriginalFilename());
+        image.setContentType(imageFile.getContentType());
+        image.setSize(imageFile.getSize());
+        image.setBytes(imageFile.getBytes());
+
+        return image;
     }
 }

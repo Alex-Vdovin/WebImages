@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 @Entity
 @Table(name = "t_images")
@@ -16,13 +17,19 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
-    private String imagePath;
+    private String name;
     @Column
-    private String username;
+    private String originalFileName;
+    private Long size;
     @Column
-    private Date dateOfUpload;
+    private String contentType;
+    private LocalDateTime dateOfCreation;
+    @Column
+    private byte[] bytes;
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
-    @JoinColumn
     private User user;
-
+    @PrePersist
+    private void init(){
+        dateOfCreation = LocalDateTime.now();
+    }
 }

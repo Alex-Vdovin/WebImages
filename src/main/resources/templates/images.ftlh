@@ -4,6 +4,6 @@
     <title>WebImages</title>
 </head>
 <body>
-Hello!!!}!
+Hello, ${user.username}!
 </body>
 </html>
