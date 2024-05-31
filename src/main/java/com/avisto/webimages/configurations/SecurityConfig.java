@@ -14,12 +14,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final CustomUserDetailsService userDetailsService;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
         http.authorizeRequests()
-                .antMatchers("/registration")
-                .permitAll()
+                .antMatchers("/registration").permitAll()
+                .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(8);
     }
 }

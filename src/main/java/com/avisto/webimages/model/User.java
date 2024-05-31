@@ -33,7 +33,7 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>();
 
-    public void addImageToUser(Image image){
+    public void addImageToUser(Image image) {
         image.setUser(this);
         userImages.add(image);
         System.out.println("OK");

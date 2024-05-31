@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
+
 @Entity
 @Table(name = "t_images")
 @Data
@@ -28,8 +28,9 @@ public class Image {
     private byte[] bytes;
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     private User user;
+
     @PrePersist
-    private void init(){
+    private void init() {
         dateOfCreation = LocalDateTime.now();
     }
 }

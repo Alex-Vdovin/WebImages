@@ -3,6 +3,7 @@ package com.avisto.webimages.services;
 import com.avisto.webimages.model.Image;
 import com.avisto.webimages.model.User;
 import com.avisto.webimages.model.enums.Role;
+import com.avisto.webimages.repositories.ImageRepository;
 import com.avisto.webimages.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,9 +19,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final ImageRepository imageRepository;
     private final PasswordEncoder passwordEncoder;
-    public boolean createUser(User user){
-        if(userRepository.findByUsername(user.getUsername()) != null){
+
+    public boolean createUser(User user) {
+        if (userRepository.findByUsername(user.getUsername()) != null) {
             return false;
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -29,12 +32,15 @@ public class UserService {
         userRepository.save(user);
         return true;
     }
-    public List<User> userList(){
+
+    public List<User> userList() {
         return userRepository.findAll();
     }
-    public User getUserByUsername(String username){
+
+    public User getUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+
     public void saveImage(User user, MultipartFile imageFile) throws IOException {
         Image image;
         if (imageFile.getSize() != 0) {
@@ -42,6 +48,14 @@ public class UserService {
             user.addImageToUser(image);
             userRepository.save(user);
         }
+    }
+
+    public void deleteImage(Long imageId) {
+        imageRepository.deleteById(imageId);
+    }
+
+    public void saveUser(User user) {
+        userRepository.save(user);
     }
 
     private Image toImageEntity(MultipartFile imageFile) throws IOException {
