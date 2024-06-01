@@ -36,7 +36,6 @@ public class User implements UserDetails {
     public void addImageToUser(Image image) {
         image.setUser(this);
         userImages.add(image);
-        System.out.println("OK");
     }
 
     public boolean isAdmin() {

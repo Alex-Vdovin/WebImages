@@ -1,1 +1,0 @@
-Ну че каво ${user.username}?

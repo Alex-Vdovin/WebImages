@@ -1,0 +1,17 @@
+.pagination-item {
+     display: inline-block; /* Изменяет поведение элементов списка */
+     margin-right: 5px; /* Добавляет небольшой отступ справа между элементами */
+ }
+
+.pagination-link {
+     text-decoration: none;
+     color: #000; /* Цвет текста ссылки */
+     padding: 5px 10px; /* Добавляет внутренние отступы для улучшения читаемости */
+     border-radius: 3px; /* Скругленные углы для ссылок */
+     background-color: #f0f0f0; /* Фон ссылки */
+     cursor: pointer; /* Изменяет курсор на указатель при наведении */
+ }
+
+.pagination-link:hover {
+     background-color: #e0e0e0; /* Темнее фон при наведении */
+ }

@@ -13,7 +13,7 @@ public class AdminController {
 
     @PostMapping("/admin/delete")
     public String deleteUserImage(@RequestParam("imageId") Long imageId) {
-        userService.deleteImage(imageId);// Предполагается, что у вас есть метод saveUser для сохранения изменений
-        return "redirect:/"; // Перенаправляем обратно на страницу со списком изображений
+        userService.deleteImage(imageId);
+        return "redirect:/";
     }
 }
