@@ -1,4 +1,4 @@
-Приложение для выкладывания изображений на страницу.
+Приложение для выкладывания изображений на web-страницу.
 
 Реализованы следующие страницы:
 1) Страница регистрации /webimages/registration
@@ -13,6 +13,7 @@
 Spring Boot (version 2.5.6)
 Spring Security
 Spring Data JPA
+Spring MVC
 Lombok
 Maven
 PostgreSQL
